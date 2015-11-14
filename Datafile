@@ -1,0 +1,31 @@
+#
+# Creates a docker container with Nexus Artifact Repository
+#
+
+FROM centos:7
+
+## localtime setting
+RUN
+	ln -sf /usr/share/zoneinfo/Asia/Seoul /etc/localtime && \
+
+# Update the system
+RUN
+	yum -y update && \
+	yum clean all && \
+	yum install wget net-tools -y  && \
+	yum install openssh-server 
+
+# setting ssh service
+RUN
+	/usr/bin/ssh-keygen -P "" -t dsa -f /etc/ssh/ssh_host_dsa_key
+	/usr/bin/ssh-keygen -P "" -t dsa -f /etc/ssh/ssh_host_ecdsa_key
+	/usr/bin/ssh-keygen -P "" -t dsa -f /etc/ssh/ssh_host_ed25519_key
+
+# seting root passwd
+RUN
+	echo 'root:passw0rd' | chpasswd
+
+# run sshd	
+RUN
+	/usr/sbin/sshd &
+
