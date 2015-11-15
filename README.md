@@ -9,10 +9,20 @@ Nexus OSS on CentOS7 with Docker
 
 # Build
 ```
-docker build -t thlee/nexus .
+docker build -t nexus .
 ```
 
 # Run
 ```
-docker run -p 18081:8081 thlee/nexus
+docker run -p 18081:8081 nexus
+```
+
+# Connect Web
+```
+http://${docker-machine-ip}:18081/nexus
+```
+
+# web id/pwd
+```
+id : admin, password : admin123
 ```
