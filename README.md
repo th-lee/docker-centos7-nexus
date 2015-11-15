@@ -17,12 +17,12 @@ docker build -t nexus .
 docker run -p 18081:8081 nexus
 ```
 
-# Connect Web
+## Connect Web
 ```
 http://${docker-machine-ip}:18081/nexus
 ```
 
-# web id/pwd
+## Login id/pwd
 ```
 id : admin, password : admin123
 ```
