@@ -22,14 +22,13 @@ RUN yum localinstall jdk-7u80-linux-x64.rpm -y  && \
   JAVA_HOME=/usr/java/jdk1.7.0_80
 
 # Install Nexus
-RUN mkdir -p /opt/sonatype-nexus /opt/sonatype-work/nexus/conf  && \
+RUN mkdir -p /opt/sonatype-nexus /opt/sonatype-work  && \
   wget -O /tmp/nexus-latest-bundle.tar.gz http://www.sonatype.org/downloads/nexus-latest-bundle.tar.gz  && \
   tar xzvf /tmp/nexus-latest-bundle.tar.gz -C /opt/sonatype-nexus --strip-components=1  && \
   rm -rf /tmp/nexus-latest-bundle.tar.gz 
   
 # Configure Nexus
 RUN useradd --user-group --system --home-dir /opt/sonatype-nexus nexus  && \
-  wget -O /opt/sonatype-work/nexus/conf/nexus.xml https://raw.githubusercontent.com/fabric8io/nexus-docker/master/nexus.xml  && \
   chown -R nexus:nexus /opt/sonatype-nexus /opt/sonatype-work
 
 # Start shell
