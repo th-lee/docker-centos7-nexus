@@ -2,6 +2,8 @@ FROM  centos:7
 
 MAINTAINER thlee <thlee@nextree.co.kr>
 
+ENV JAVA_HOME=/usr/java/jdk1.7.0_80
+
 # System update
 RUN yum -y update && \
   yum clean all && \
@@ -28,11 +30,11 @@ RUN mkdir -p /opt/sonatype-nexus /opt/sonatype-work/nexus/conf  && \
 # Configure Nexus
 RUN useradd --user-group --system --home-dir /opt/sonatype-nexus nexus  && \
   wget -O /opt/sonatype-work/nexus/conf/nexus.xml https://raw.githubusercontent.com/fabric8io/nexus-docker/master/nexus.xml  && \
-  chown -R nexus:nexus /opt/sonatype-nexus /opt/sonatype-work  && \
-  touch /usr/bin/start-nexus.sh
+  chown -R nexus:nexus /opt/sonatype-nexus /opt/sonatype-work
 
 # Start shell
-RUN echo '#!/bin/bash' > /usr/bin/start-nexus.sh  && \
+RUN touch /usr/bin/start-nexus.sh && \
+  echo '#!/bin/bash' > /usr/bin/start-nexus.sh  && \
   echo "su -c \"/opt/sonatype-nexus/bin/nexus console\" - nexus" >> /usr/bin/start-nexus.sh
 
 # Stop shell
