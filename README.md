@@ -14,7 +14,7 @@ docker build -t nexus .
 
 # Run
 ```
-docker run -p 18081:8081 nexus
+docker run -p 18081:8081 --name mynexus nexus
 ```
 
 ## Connect Web
@@ -25,4 +25,9 @@ http://${docker-machine-ip}:18081/nexus
 ## Login id/pwd
 ```
 id : admin, password : admin123
+```
+
+## nexus log
+```
+docker exec mynexus tail -f /opt/sonatype-work/nexus/logs/nexus.log
 ```
