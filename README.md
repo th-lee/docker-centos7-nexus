@@ -14,7 +14,7 @@ docker build -t nexus .
 
 # Run
 ```
-docker run -p 18081:8081 --name mynexus nexus
+docker run -d -p 18081:8081 --name mynexus nexus
 ```
 
 ## Connect Web
